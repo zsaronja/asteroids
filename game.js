@@ -455,22 +455,6 @@ Ship = function () {
     if (KEY_STATUS.space) {
       if (this.delayBeforeBullet <= 0) {
         this.delayBeforeBullet = 10;
-        for (var i = 0; i < this.bullets.length; i++) {
-          if (!this.bullets[i].visible) {
-            SFX.laser();
-            var bullet = this.bullets[i];
-            var rad = ((this.rot-90) * Math.PI)/180;
-            var vectorx = Math.cos(rad);
-            var vectory = Math.sin(rad);
-            // move to the nose of the ship
-            bullet.x = this.x + vectorx * 4;
-            bullet.y = this.y + vectory * 4;
-            bullet.vel.x = 6 * vectorx + this.vel.x;
-            bullet.vel.y = 6 * vectory + this.vel.y;
-            bullet.visible = true;
-            break;
-          }
-        }
         this.shoot();
       }
     }
@@ -738,7 +722,10 @@ Coin = function () {
               0,  5,
               5,  0,
               0, -5]);
-
+  
+  this.color = 'yellow';
+  this.solid = true;
+  
   this.collidesWith = ["ship"];
 
   this.newPosition = function () {
